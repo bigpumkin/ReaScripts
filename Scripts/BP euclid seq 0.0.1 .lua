@@ -1,56 +1,22 @@
 function main()
 
-  sel_midi = get_sel_midi_item()
+  sel_midi = get_sel_midi_take()
   num_step = get_num_step(sel_midi)
-  seq_euclid(num_step, 4, sel_midi)
+  seq_euclid(sel_midi, num_step, 4)
   
 end
 
---_______Seq func_______________________________
-function seq_euclid(num_step, num_beat, sel_midi)
-
-  for i = 0, num_step - 1 do
-    
-    multiplied = num_step * i
-    
-    index = multiplied / num_beat
-    note_start = get_note_start(index)
-    
-    if multiplied % num_beat then 
-      if index == 0 then --If note in zero step
-        
-        reaper.MIDI_InsertNote(sel_midi,0,0,0,50,0,72,30)
-        index = index + 1
-        
-      end
-      
-      note_start = get_note_start(index)
-      reaper.MIDI_InsertNote(sel_midi,0,0,0,50,0,72,30)
-      index = index + i 
-      
-    end
-    
-  end
-  
-end    
-
-
 --_________________Addiction funct___________________
-function get_sel_midi_item()
+function get_sel_midi_take()
 
   if reaper.CountSelectedMediaItems(0) ~= 0 then
-  
-    --for i = 0, reaper.CountSelectedMediaItems(0)-1 do 
     
     item = reaper.GetSelectedMediaItem(0, 0)
     take = reaper.GetActiveTake(item)
-      
-   -- end
     
     if reaper.TakeIsMIDI(take)then 
     
       return take
-      
       
     else 
     
@@ -72,9 +38,9 @@ function get_num_step(sel_midi)
 end
 
 
-function get_note_start(index)
-
-  note_start = reaper.BR_GetMidiSourceLenPPQ(sel_midi)/16 * index
+function get_note_start(sel_midi, num_step, index)
+  
+  note_start = reaper.BR_GetMidiSourceLenPPQ(sel_midi)/num_step * index
   
   return note_start
   
