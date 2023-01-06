@@ -16,13 +16,13 @@ function get_sel_midi_item()
     for i = 0, reaper.CountSelectedMediaItems(0)-1 do 
     
       item = reaper.GetSelectedMediaItem(0, i)
-      take_midi = reaper.GetActiveTake(item)
+      take = reaper.GetActiveTake(item)
       
     end
     
-    if reaper.TakeIsMIDI(take_midi)then 
+    if reaper.TakeIsMIDI(take)then 
     
-      return take_midi
+      return take
       
     else 
     
