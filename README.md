@@ -10,9 +10,3 @@ function get_sel_midi_item() - возвращает выбранный миди 
 function get_num_step(grid) - возращает количесто шагов в айтеме.
   принимает значения сетки в QN (см.reaper.MIDI_GetGrid())
 get_note_start(index) - возвращает шаг миди айтема в QN
-
-
-**Изменения**
-
-0.0.1  (нерабочая версия)
-- Добавлены вспомогательные функции get_sel_midi_item, get_num_step, get_note_start
